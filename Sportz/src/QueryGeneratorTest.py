@@ -1,4 +1,6 @@
+import MockResults
 import unittest
+import mock
 import QueryGenerator
 
 class InsertionSortTests(unittest.TestCase):
@@ -7,8 +9,13 @@ class InsertionSortTests(unittest.TestCase):
   
   def tearDown(self):
     pass
-  
-  def test_GetTeamsConferenceAndDivision(self):
+
+  @mock.patch('QueryGenerator.urllib.urlopen')
+  def test_GetTeamsConferenceAndDivision(self, mock_urlopen):
+    page_request = mock.Mock()
+    page_request.read.return_value = MockResults.TEAMS_CONFERENCE_AND_DIVISION
+    mock_urlopen.return_value = page_request
+    
     solution = {"Bears":{"conference":"NFC","division":"NFC North"},
                 "Bengals":{"conference":"AFC","division":"AFC North"},
                 "Bills":{"conference":"AFC","division":"AFC East"},
@@ -45,7 +52,12 @@ class InsertionSortTests(unittest.TestCase):
     actual = QueryGenerator.GetTeamConferenceDivision(2014)
     self.assertEqual(solution, actual)
   
-  def test_GetTeamScheduleDatesAndOpponents(self):
+  @mock.patch('QueryGenerator.urllib.urlopen')
+  def test_GetTeamScheduleDatesAndOpponents(self, mock_urlopen):
+    page_request = mock.Mock()
+    page_request.read.return_value = MockResults.TEAMS_SCHEDULE_AND_OPPONENT
+    mock_urlopen.return_value = page_request
+    
     solution = {20140907:{"opponent":"Broncos"},
                 20140915:{"opponent":"Eagles"},
                 20140921:{"opponent":"Jaguars"},

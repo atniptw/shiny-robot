@@ -1,10 +1,10 @@
-from urllib import quote_plus, urlopen
+import urllib
 
 BASE_URL = "http://api.sportsdatabase.com/nfl/query.json?output=json&api_key=guest&sdql={}"
 
 def GetTeamConferenceDivision(season):
-  url = BASE_URL.format(quote_plus("team, conference, division@season={}".format(season)))
-  result = _FormatStringToJSON(urlopen(url).read())
+  url = BASE_URL.format(urllib.quote_plus("team, conference, division@season={}".format(season)))
+  result = _FormatStringToJSON(urllib.urlopen(url).read())
 
   teams = {}
   data = result['groups'][0]['columns']
@@ -15,8 +15,8 @@ def GetTeamConferenceDivision(season):
   return teams
 
 def GetTeamScheduleDatesOpponents(team, season):
-  url = BASE_URL.format(quote_plus("date, o:team@team={0} and season={1}".format(team, season)))
-  result = _FormatStringToJSON(urlopen(url).read())
+  url = BASE_URL.format(urllib.quote_plus("date, o:team@team={0} and season={1}".format(team, season)))
+  result = _FormatStringToJSON(urllib.urlopen(url).read())
 
   games = {}
   data = result['groups'][0]['columns']
