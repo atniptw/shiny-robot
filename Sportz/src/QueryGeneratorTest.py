@@ -55,6 +55,15 @@ class QueryGeneratorTest(TestCase):
     self.assertEqual(0, actual)
 
   @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamBlockedFieldGoals(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'blocked field goals\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [0]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_blocked_field_goals(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "blocked field goals@team=Colts and season=2014 and week=1"})
+    self.assertEqual(0, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
   def test_GetTeamBlockedPunts(self, mock_request):
     self.page_request.text = 'json_callback({  "headers": [\'blocked punts\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [0]   ]}   ] });\n'
     mock_request.return_value = self.page_request
@@ -62,6 +71,70 @@ class QueryGeneratorTest(TestCase):
     actual = self.test_team.get_team_blocked_punts(1)
     mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "blocked punts@team=Colts and season=2014 and week=1"})
     self.assertEqual(0, actual)
-    
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamCompletions(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'completions\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [35]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_completions(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "completions@team=Colts and season=2014 and week=1"})
+    self.assertEqual(35, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamDrives(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'drives\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [12]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_drives(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "drives@team=Colts and season=2014 and week=1"})
+    self.assertEqual(12, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamFieldGoals(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'field goals\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [1]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_field_goals(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "field goals@team=Colts and season=2014 and week=1"})
+    self.assertEqual(1, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamFieldGoalsAttempted(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'field goals\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [1]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_field_goals_attempted(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "field goals attempted@team=Colts and season=2014 and week=1"})
+    self.assertEqual(1, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamFirstDowns(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'first downs\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [24]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_first_downs(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "first downs@team=Colts and season=2014 and week=1"})
+    self.assertEqual(24, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamFourthDownsAttempted(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'fourth downs attempted\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [4]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_fourth_downs_attempted(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "fourth downs attempted@team=Colts and season=2014 and week=1"})
+    self.assertEqual(4, actual)
+
+  @mock.patch('QueryGenerator.requests.get')
+  def test_GetTeamFourthDownsMade(self, mock_request):
+    self.page_request.text = 'json_callback({  "headers": [\'fourth downs made\'], "groups": [ {    "sdql": "team = Colts and season = 2014 and week = 1" ,   "columns" : [     [2]   ]}   ] });\n'
+    mock_request.return_value = self.page_request
+
+    actual = self.test_team.get_team_fourth_downs_made(1)
+    mock_request.assert_called_once_with("http://api.sportsdatabase.com/nfl/query.json", params={"output" : "json", "api_key" : "guest", "sdql" : "fourth downs made@team=Colts and season=2014 and week=1"})
+    self.assertEqual(2, actual)
+
+
 if __name__ == '__main__':
   main()
