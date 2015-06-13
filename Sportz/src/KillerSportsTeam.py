@@ -61,6 +61,33 @@ class KillerSportsTeam:
   def get_team_fourth_downs_made(self, week):
     return self._get_game_parameter("fourth downs made", week)
   
+  def get_team_fumble_return_touchdowns(self, week):
+    return self._get_game_parameter("fumble return touchdowns", week)
+
+  def get_team_fumbles(self, week):
+    return self._get_game_parameter("fumbles", week)
+  
+  def get_team_fumbles_lost(self, week):
+    return self._get_game_parameter("fumbles lost", week)
+
+  def get_team_goal_to_go_attempted(self, week):
+    return self._get_game_parameter("goal to go attempted", week)
+
+  def get_team_goal_to_go_made(self, week):
+    return self._get_game_parameter("goal to go made", week)
+
+  def get_team_interception_return_yards(self, week):
+    return self._get_game_parameter("interception return yards", week)
+  
+  def get_team_interception_returns(self, week):
+    return self._get_game_parameter("interception returns", week)
+
+  def get_team_interception_touchdowns(self, week):
+    return self._get_game_parameter("interception touchdowns", week)
+
+  def get_team_interceptions(self, week):
+    return self._get_game_parameter("interceptions", week)
+
   def get_team_opponent(self, week):
     return self._get_game_parameter("o:team", week)
 
